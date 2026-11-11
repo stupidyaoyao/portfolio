@@ -1,3 +1,8 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Frank Ng Jia Yao</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="Frank — video editor & videographer in Kuala Lumpur. Music videos, short dramas, brand TikTok and live commerce.">
@@ -33,6 +38,9 @@
   --scrim:rgba(26,18,16,.7); color-scheme:light}
 
 *{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0}
+img{max-width:100%}
 html{scroll-behavior:smooth;scroll-padding-top:72px}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
 body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6}
@@ -271,6 +279,9 @@ dialog::backdrop{background:var(--scrim)}
   dialog{max-height:100dvh;height:100dvh}
 }
 </style>
+</head>
+<body>
+
 
 <nav class="nav" aria-label="Main">
   <div class="wrap">
@@ -717,3 +728,6 @@ document.getElementById('dlg-x').addEventListener('click', closeDlg);
 dlg.addEventListener('click', e => { if (e.target === dlg) closeDlg(); });
 dlg.addEventListener('close', () => { stage.innerHTML=''; resumeReel(); });
 </script>
+
+</body>
+</html>
