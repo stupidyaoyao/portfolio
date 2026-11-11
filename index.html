@@ -380,14 +380,14 @@ const CATS = [
   ['all','All'],
   ['music','Music Video & BTS'],
   ['drama','Entertainment & Drama'],
-  ['brand','Brand Ads & TikTok'],
+  ['brand','Commercials & Brand Ads'],
   ['live','Live Commerce'],
   ['corp','Corporate · Korea'],
   ['design','Design & Social'],
 ];
 
 const P = [
-  {id:"fragile", wideIn:['music','all'], cats:['music'], client:'Namewee 黃明志', title:"Fragile 玻璃心", result:"77.7M views",
+  {id:"fragile", wideIn:['music'], cats:['music'], client:'Namewee 黃明志', title:"Fragile 玻璃心", result:"77.7M views",
    desc:"ft. Kimberley Chen 陳芳語. #1 trending in Taiwan, Hong Kong, Singapore and Malaysia.",
    roles:['Production editor'], orient:'h', link:'https://www.youtube.com/watch?v=-Rp7UPbhErE', items:[{...yt(["-Rp7UPbhErE"])[0],label:"Official MV · 77.7M views"},{...yt(["TTd7M9QjM3M"])[0],label:"Making Of"},{...yt(["oX3D9HTc7I8"])[0],label:"Taiwanese YouTuber Reaction"}]},
   {id:"wall", cats:['music'], client:'Namewee 黃明志', title:"牆外 Beyond the Wall", result:"17.6M views",
@@ -434,6 +434,10 @@ const P = [
   {id:'winbox', cats:['drama','brand'], client:'Winbox · Entertainment', title:'Winbox branding films', result:'4K cinematic spots',
    desc:'Cinematic lifestyle spots with five talents and the LoopKL brand film, delivered in 15s and 30s cuts.',
    roles:['Producer','Editor'], orient:'h', items:[{kind:'local', src:'media/wb_loopkl.mp4', thumb:'media/wb_loopkl.jpg', label:"Winbox LoopKL \u00b7 brand film"},{kind:'local', src:'media/wb_valent.mp4', thumb:'media/wb_valent.jpg', label:"Valent \u00b7 producer cut"},{kind:'local', src:'media/wb_diorwynn.mp4', thumb:'media/wb_diorwynn.jpg', label:"Diorwynn \u00b7 30s spot"},{kind:'local', src:'media/wb_josephy.mp4', thumb:'media/wb_josephy.jpg', label:"Josephy \u00b7 30s spot"},{kind:'local', src:'media/wb_peiyu.mp4', thumb:'media/wb_peiyu.jpg', label:"Pei Yu \u00b7 30s spot"}]},
+  {id:'krad', cats:['brand','corp'], client:'Korea · Commercials', title:'Korean commercials', result:'TV-style spots',
+   desc:'A promo spot for the 24th Hongseong Namdanghang Shrimp Festival and a limited-edition Disney diary unboxing film produced exclusively for SC First Bank.',
+   roles:['Editor','Videographer'], orient:'h', link:'https://www.youtube.com/watch?v=ZdIoj9RoygI',
+   items:[{...yt(['ZdIoj9RoygI'])[0],label:'Hongseong Namdanghang Shrimp Festival · 31s spot'},{...yt(['uqNqXyAL4No'])[0],label:'SC First Bank × Disney diary · unboxing film'}]},
   {id:'eo', cats:['brand','live'], client:'ServAuto · Automotive', title:'ServAuto Engine Oil on TikTok', result:'12.3M views',
    desc:'Promo, campaign and live-sale videos for @servauto.engineoil (57.7K followers).',
    roles:['Video editor','Live moderator','Producer'], orient:'v', link:'https://www.tiktok.com/@servauto.engineoil',
