@@ -53,11 +53,11 @@ button{font:inherit;color:inherit}
 .nav ul{display:flex;gap:4px;list-style:none;margin:0;padding:0}
 .nav ul a{display:block;padding:8px 12px;border-radius:999px;text-decoration:none;font-weight:600;font-size:14px}
 .nav ul a:hover{background:var(--soft)}
-.nav ul a.cta{background:#1f9d55;color:#fff}
+.nav ul a.cta{background:var(--grad);color:#fff}
 @media (max-width:640px){.nav ul li:not(:last-child){display:none}}
 
 /* hero */
-.hero{display:grid;grid-template-columns:1.25fr .75fr;gap:48px;align-items:center;padding-block:56px 48px}
+.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center;padding-block:56px 48px}
 .hero h1{font-family:var(--display);font-weight:900;font-stretch:118%;font-size:clamp(40px,6.6vw,80px);line-height:.95;letter-spacing:-.02em;margin:14px 0 0}
 .hero .name{font-family:var(--display);font-weight:900;font-stretch:122%;font-size:clamp(40px,6.6vw,92px);line-height:.92;letter-spacing:-.02em;margin:14px 0 0;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
 .hero .name span{display:block;white-space:nowrap}
@@ -73,10 +73,54 @@ button{font:inherit;color:inherit}
 .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 20px;border-radius:999px;text-decoration:none;font-weight:700;font-size:15px;border:1px solid var(--line);background:var(--panel);cursor:pointer}
 .btn.primary{background:var(--grad);border-color:transparent;color:#fff;box-shadow:var(--glow)}
 .btn:hover{transform:translateY(-1px)}
-.monitor{position:relative;max-width:340px;justify-self:center;width:100%}
-.monitor video{width:100%;aspect-ratio:9/16;max-width:100%;object-fit:cover;border-radius:18px;background:#000;display:block;box-shadow:0 30px 60px -30px rgba(0,0,0,.5)}
-.monitor .rec{position:absolute;top:12px;left:12px;font-family:var(--mono);font-size:11px;color:#fff;background:rgba(0,0,0,.55);padding:4px 8px;border-radius:6px}
-.monitor .unmute{position:absolute;bottom:12px;right:12px;border:0;background:rgba(255,255,255,.92);color:#111;font-weight:700;font-size:13px;padding:8px 12px;border-radius:999px;cursor:pointer}
+.reel{position:relative;margin:0;width:100%;align-self:center}
+.reel-screen{position:relative;aspect-ratio:16/9;max-width:100%;border-radius:18px;overflow:hidden;background:#000;box-shadow:var(--glow),0 30px 60px -30px rgba(0,0,0,.6)}
+.reel-layer{position:absolute;inset:0;opacity:0;transition:opacity .8s ease}
+.reel-layer.on{opacity:1}
+.reel-layer iframe{position:absolute;top:50%;left:50%;width:100%;height:100%;border:0;transform:translate(-50%,-50%) scale(1.32);pointer-events:none}
+.reel-layer video.fg{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.reel-layer .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:blur(18px) brightness(.55);transform:scale(1.2)}
+.reel-layer img.still{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;animation:kb 8s ease-out both}
+@keyframes kb{from{transform:scale(1.02)}to{transform:scale(1.12)}}
+.reel-rec{position:absolute;top:12px;left:12px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:#fff;background:rgba(0,0,0,.55);padding:4px 8px;border-radius:6px;z-index:2}
+.reel-cap{all:unset;cursor:pointer;display:flex;flex-direction:column;gap:2px;margin-top:14px;padding:4px 2px}
+.reel-cap:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:8px}
+.reel-client{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-2)}
+.reel-cap b{font-family:var(--display);font-stretch:110%;font-size:20px;line-height:1.25}
+.reel-open{font-size:13px;font-weight:700;color:var(--accent)}
+.reel-bar{display:flex;gap:6px;margin-top:12px}
+.reel-bar button{flex:1;height:4px;border:0;padding:0;border-radius:4px;background:var(--line);cursor:pointer;overflow:hidden;position:relative}
+.reel-bar button.on::after{content:"";position:absolute;inset:0;background:var(--grad);transform-origin:left;animation:fill var(--dur,7s) linear both}
+.reel-bar button.done{background:color-mix(in srgb,var(--accent) 55%,var(--line))}
+@keyframes fill{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.hero .bio{font-size:clamp(17px,1.7vw,20px);line-height:1.55;max-width:46ch;margin:20px 0 0;font-weight:500}
+.hero .bio-zh{color:var(--muted);margin:8px 0 0;font-weight:600}
+.strip{margin-top:56px;border-block:1px solid var(--line);padding-block:22px 18px;overflow:hidden}
+.strip-track{display:flex;gap:28px;width:max-content;animation:marq 38s linear infinite;align-items:center}
+.strip-track span{font-family:var(--display);font-weight:900;font-stretch:122%;font-size:clamp(34px,5.4vw,64px);line-height:1;text-transform:uppercase;white-space:nowrap;color:transparent;-webkit-text-stroke:1.4px var(--ink)}
+.strip-track span:nth-of-type(3n+1){color:var(--accent);-webkit-text-stroke:0}
+.strip-track i{font-style:normal;color:var(--accent-2);font-size:clamp(20px,2.6vw,30px)}
+@keyframes marq{to{transform:translateX(-50%)}}
+.strip-clients{margin:16px 0 0;font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-align:center;text-wrap:balance}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+@media (prefers-reduced-motion:reduce){.strip-track{animation:none;flex-wrap:wrap;width:auto;justify-content:center}.strip-track span:nth-of-type(n+9),.strip-track i:nth-of-type(n+9){display:none}}
+.subbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:-6px 0 22px;padding:12px 14px;border-radius:14px;background:var(--panel);border:1px solid var(--line)}
+.subbar .mono{margin-right:4px}
+.subbar button{border:1px solid var(--line);background:var(--soft);border-radius:999px;padding:7px 13px;font-weight:700;font-size:13px;cursor:pointer}
+.subbar button:hover{border-color:var(--accent);color:var(--accent)}
+.dwall{margin-top:40px}
+.dwall[hidden]{display:none}
+.dwall-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin:0 0 16px}
+.dwall-head h3{margin:0;font-family:var(--display);font-stretch:112%;font-weight:800;font-size:26px}
+.dset{margin-bottom:28px}
+.dset h4{margin:0 0 4px;font-size:17px}
+.dset p{margin:0 0 14px;color:var(--muted);font-size:14px}
+.dmasonry{columns:4 200px;column-gap:14px}
+.dmasonry button{all:unset;display:block;break-inside:avoid;margin:0 0 14px;border-radius:12px;overflow:hidden;cursor:zoom-in;background:var(--panel);border:1px solid var(--line);transition:transform .2s,box-shadow .2s}
+.dmasonry button:hover{transform:translateY(-3px);box-shadow:var(--glow)}
+.dmasonry button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.dmasonry img{display:block;width:100%;height:auto}
+.dmasonry span{display:block;padding:8px 10px;font-size:12.5px;color:var(--muted)}
 .stats{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);border-radius:14px;background:var(--panel);overflow:hidden;margin-top:28px}
 .stats div{padding:16px;border-right:1px solid var(--line);min-width:0}
 .stats div:last-child{border-right:0}
@@ -99,7 +143,6 @@ section.block{padding-block:56px 8px}
 .ind span{color:var(--muted);font-size:14px}
 
 /* selected work */
-.sel{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 .card{display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;min-width:0;text-align:left;padding:0;cursor:pointer;transition:border-color .2s,transform .2s}
 .card:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:var(--glow)}
 .cover{position:relative;aspect-ratio:16/9;max-width:100%;background:#111;display:flex;overflow:hidden}
@@ -211,13 +254,12 @@ dialog::backdrop{background:var(--scrim)}
 
 @media (max-width:900px){
   .hero,.about{grid-template-columns:1fr;gap:32px}
-  .monitor{max-width:300px}
-  .sel,.grid{grid-template-columns:1fr 1fr}
+  .grid{grid-template-columns:1fr 1fr}
   .grid .card.wide{grid-column:span 2}
   .inds,.svc{grid-template-columns:1fr 1fr}
 }
 @media (max-width:560px){
-  .sel,.grid{grid-template-columns:1fr}
+  .grid{grid-template-columns:1fr}
   .grid .card.wide{grid-column:auto}
   .grid .card.wide .cover{aspect-ratio:16/9;height:auto;min-height:0}
   .stats{grid-template-columns:1fr 1fr}
@@ -233,11 +275,10 @@ dialog::backdrop{background:var(--scrim)}
   <div class="wrap">
     <a class="brand" href="#top"><i></i>Frank Ng Jia Yao</a>
     <ul>
-      <li><a href="#selected">Selected</a></li>
-      <li><a href="#work">All work</a></li>
+      <li><a href="#work">Work</a></li>
       <li><a href="#services">Services</a></li>
       <li><a href="#about">About</a></li>
-      <li><a class="cta wa" href="#contact">WhatsApp me</a></li>
+      <li><a class="cta" href="#contact">Contact</a></li>
     </ul>
   </div>
 </nav>
@@ -248,13 +289,12 @@ dialog::backdrop{background:var(--scrim)}
       <span class="mono">Portfolio · Kuala Lumpur, Malaysia</span>
       <h1 class="name"><span>FRANK NG</span> <span>JIA YAO</span></h1>
       <p class="roles"><span>Video Producer</span><span>Video Editor</span><span>Director</span></p>
-      <p class="tag-line">Cuts that keep people <em>watching.</em> 你好，我是 Frank，8 年剪辑与制作经验。</p>
-      <p class="lead">Video producer and editor with 8 years of experience: corporate and government content in Korea, music videos for Namewee, short dramas and brand TikToks in Malaysia. I also plan series, run brand content and moderate live sales. Open to long-term collaboration.</p>
+      <p class="bio">Korea-trained filmmaker based in Kuala Lumpur. I've edited music videos for Namewee, web dramas and government films in Korea, and brand campaigns watched by millions.</p>
+      <p class="bio-zh">韩国毕业的影像制作人、剪辑师与导演，现居吉隆坡。</p>
       <div class="langs" aria-label="Languages"><span>中文 Mandarin</span><span>English</span><span>한국어 Korean</span><span>Bahasa Melayu</span></div>
       <div class="btns">
-        <a class="btn primary" href="#selected">▶ Watch selected work</a>
-        <a class="btn" href="#work">Browse by category</a>
-        <a class="btn wa" href="#contact">💬 WhatsApp me</a>
+        <a class="btn primary" href="#work">▶ See my work</a>
+        <a class="btn" href="#about">About me</a>
       </div>
       <div class="stats">
         <div><b>77.7M</b><span class="mono">Top MV views</span></div>
@@ -263,27 +303,28 @@ dialog::backdrop{background:var(--scrim)}
         <div><b>8 yrs</b><span class="mono">Editing since 2018</span></div>
       </div>
     </div>
-    <figure class="monitor" style="margin:0">
-      <video id="heroVid" src="media/wc_1.mp4" poster="media/wc_1.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Short drama clip from the 96M series"></video>
-      <span class="rec">● REEL · 96M SHORT DRAMA</span>
-      <button class="unmute" id="unmute" type="button">🔊 Sound on</button>
+    <figure class="reel" id="reel" aria-label="Showreel: clips from my projects">
+      <div class="reel-screen" id="reelScreen"></div>
+      <span class="reel-rec">● NOW PLAYING</span>
+      <button class="reel-cap" id="reelCap" type="button"><span class="reel-client" id="reelClient"></span><b id="reelTitle"></b><span class="reel-open">Watch ↗</span></button>
+      <div class="reel-bar" id="reelBar"></div>
     </figure>
   </div>
 
-  <section class="block" aria-labelledby="ind-h">
-    <div class="head"><span class="tag">IND</span><h2 id="ind-h">Industries I've worked in</h2><span class="zh">合作过的行业</span></div>
-    <div class="inds" id="inds"></div>
-  </section>
-
-  <section class="block" id="selected" aria-labelledby="sel-h">
-    <div class="head"><span class="tag">SEL</span><h2 id="sel-h">Selected work</h2><span class="zh">代表作品</span></div>
-    <div class="sel" id="sel"></div>
+  <section class="strip" aria-label="Industries and clients">
+    <div class="strip-track" aria-hidden="true">
+      <span>Music Videos</span><i>✦</i><span>Entertainment</span><i>✦</i><span>Automotive</span><i>✦</i><span>Government</span><i>✦</i><span>Banking</span><i>✦</i><span>Healthcare</span><i>✦</i><span>F&amp;B</span><i>✦</i><span>Culture &amp; Sports</span><i>✦</i>
+      <span>Music Videos</span><i>✦</i><span>Entertainment</span><i>✦</i><span>Automotive</span><i>✦</i><span>Government</span><i>✦</i><span>Banking</span><i>✦</i><span>Healthcare</span><i>✦</i><span>F&amp;B</span><i>✦</i><span>Culture &amp; Sports</span><i>✦</i>
+    </div>
+    <p class="strip-clients"><span class="sr">Industries: music videos, entertainment, automotive, government, banking, healthcare, F&amp;B, culture and sports. </span>Namewee · ServAuto · SC First Bank · Seoul National University Hospital · MAFRA Korea · 2018 PyeongChang Legacy Foundation · 96M · Winbox · Kilang Minuman · Shoots</p>
   </section>
 
   <section class="block" id="work" aria-labelledby="work-h">
-    <div class="head"><span class="tag">ALL</span><h2 id="work-h">All work</h2><span class="zh">按类别浏览 · 点开看全部影片</span></div>
+    <div class="head"><span class="tag">ALL</span><h2 id="work-h">All work</h2><span class="zh">按类别浏览 · 点开看全部作品</span></div>
     <div class="filters" id="filters" role="group" aria-label="Filter by category"></div>
+    <div class="subbar" id="subbar" hidden></div>
     <div class="grid" id="grid"></div>
+    <div class="dwall" id="dwall"></div>
   </section>
 
   <section class="block" id="services" aria-labelledby="svc-h">
@@ -409,25 +450,23 @@ const local = (pre, n, label) => Array.from({length:n}, (_, i) => ({kind:'local'
 
 const CATS = [
   ['all','All'],
-  ['music','Music Video & BTS'],
-  ['drama','Entertainment & Drama'],
-  ['brand','Commercials & Brand Ads'],
-  ['live','Live Commerce'],
-  ['corp','Korea work'],
-  ['design','Design & Social'],
+  ['music','Music Videos'],
+  ['ent','Entertainment & Commercials'],
+  ['korea','Korea Work'],
+  ['design','Design'],
 ];
 
 const P = [
-  {id:"fragile", wideIn:['music'], cats:['music'], client:'Namewee 黃明志', title:"Fragile 玻璃心", result:"77.7M views",
+  {id:"fragile", cover:'hero/-Rp7UPbhErE.jpg', wideIn:['music','all'], cats:['music'], client:'Namewee 黃明志', title:"Fragile 玻璃心", result:"77.7M views",
    desc:"ft. Kimberley Chen 陳芳語. #1 trending in Taiwan, Hong Kong, Singapore and Malaysia.",
    roles:['Production editor'], orient:'h', link:'https://www.youtube.com/watch?v=-Rp7UPbhErE', items:[{...yt(["-Rp7UPbhErE"])[0],label:"Official MV · 77.7M views"},{...yt(["TTd7M9QjM3M"])[0],label:"Making Of"},{...yt(["oX3D9HTc7I8"])[0],label:"Taiwanese YouTuber Reaction"}]},
-  {id:"wall", cats:['music'], client:'Namewee 黃明志', title:"牆外 Beyond the Wall", result:"17.6M views",
+  {id:"wall", cover:'hero/WCLlFA9SiDI.jpg', cats:['music'], client:'Namewee 黃明志', title:"牆外 Beyond the Wall", result:"17.6M views",
    desc:"ft. 小花. Shot in Kinmen, facing Xiamen across the water.",
    roles:['Production editor'], orient:'h', link:'https://www.youtube.com/watch?v=WCLlFA9SiDI', items:[{...yt(["WCLlFA9SiDI"])[0],label:"Official MV · 17.6M views"},{...yt(["6sDERBmygwY"])[0],label:"Making Of"}]},
-  {id:"curry", cats:['music'], client:'Namewee 黃明志', title:"Curry & Roti 咖喱和甩餅", result:"8.7M views",
+  {id:"curry", cover:'hero/LPB6fUlNAqc.jpg', cats:['music'], client:'Namewee 黃明志', title:"Curry & Roti 咖喱和甩餅", result:"8.7M views",
    desc:"Bollywood-style MV ft. Thila Laxshman & Sanjna Suri, tied to the film Nasi Lemak 1.0.",
    roles:['Production editor'], orient:'h', link:'https://www.youtube.com/watch?v=LPB6fUlNAqc', items:[{...yt(["LPB6fUlNAqc"])[0],label:"Official MV · 8.7M views"},{...yt(["AudLXEj7d_M"])[0],label:"Making Of"},{...yt(["lcOFCH0y9h4"])[0],label:"Lyric Video"}]},
-  {id:"tenmen", cats:['music'], client:'Namewee 黃明志', title:"十個男人 Ten Men", result:"6.7M views",
+  {id:"tenmen", cover:'hero/ickj4DT5S3U.jpg', cats:['music'], client:'Namewee 黃明志', title:"十個男人 Ten Men", result:"6.7M views",
    desc:"ft. Matilda Tao 陶晶瑩, a new take on her classic hit.",
    roles:['Production editor'], orient:'h', link:'https://www.youtube.com/watch?v=ickj4DT5S3U', items:[{...yt(["ickj4DT5S3U"])[0],label:"Official MV · 6.7M views"},{...yt(["aB3uCB2s-2Q"])[0],label:"Making Of"}]},
   {id:"hangout", cats:['music'], client:'Namewee 黃明志', title:"揪你出去玩 Hang Out & Play Now", result:"4M views",
@@ -442,7 +481,7 @@ const P = [
   {id:"809000", cats:['music'], client:'Namewee 黃明志', title:"809000", result:"3.6M views",
    desc:"ft. MDD 周立銘 & Frog 青蛙, a retro 80s-90s-00s throwback.",
    roles:['Production editor'], orient:'h', link:'https://www.youtube.com/watch?v=06AOHRFK-m8', items:[{...yt(["06AOHRFK-m8"])[0],label:"Official MV · 3.6M views"}]},
-  {id:"hater", cats:['music'], client:'Namewee 黃明志', title:"Hello Hater", result:"2.2M views",
+  {id:"hater", cover:'hero/xyos93gW5e4.jpg', cats:['music'], client:'Namewee 黃明志', title:"Hello Hater", result:"2.2M views",
    desc:"ft. Asiaboy 禁藥王 & Lizi 栗子, with a making-of film shot in Afghanistan.",
    roles:['Production editor'], orient:'h', link:'https://www.youtube.com/watch?v=xyos93gW5e4', items:[{...yt(["xyos93gW5e4"])[0],label:"Official MV · 2.2M views"},{...yt(["RCV8qTt4ktY"])[0],label:"Making Of"}]},
   {id:"bull", cats:['music'], client:'Namewee 黃明志', title:"金牛 Like a Bull", result:"1.7M views",
@@ -451,29 +490,29 @@ const P = [
   {id:"nwchannel", cats:['music'], client:'Namewee 黃明志', title:"Namewee channel specials", result:"Channel content",
    desc:"KPKB 2021 Rewind, the “Let's Make A Hit Song” series finale and the 你不懂 demo.",
    roles:['Production editor'], orient:'h', link:'https://www.youtube.com/watch?v=2gFWIhduRmw', items:[{...yt(["2gFWIhduRmw"])[0],label:"KPKB 2021 Rewind"},{...yt(["F7g82PPtYZ0"])[0],label:"Let's Make A Hit Song · Finale"},{...yt(["vpcWl-YJ_uo"])[0],label:"你不懂 · Demo"}]},
-  {id:'yyds', cats:['drama'], client:'谁是王者 · Entertainment', title:'谁是王者之 YYDS 就是你', result:'26 episodes',
+  {id:'yyds', cover:['hero/yy_EuucG2LaB9E.jpg','hero/yy_XF3OL_Yk_w8.jpg','hero/yy_XICKworFbhU.jpg'], cats:['ent'], client:'谁是王者 · Entertainment', title:'谁是王者之 YYDS 就是你', result:'26 episodes',
    desc:'Malaysia\'s reality investment-makeover series. I planned the episodes and edited every cut, including trailers.',
    roles:['Full editor','Planner'], orient:'v', link:'https://www.youtube.com/playlist?list=PLiUGJoWQRXQsMdX90cQVOHwgC-6oprfJ6',
    items:yt(BEST.yyds)},
-  {id:'m96', cats:['drama','brand'], client:'96M · Entertainment', title:'96M short drama ads', result:'26 episodes · best 8',
+  {id:'m96', cover:['media/m96_n1.jpg','media/m96_n4.jpg','media/wc_4.jpg'], cats:['ent'], client:'96M · Entertainment', title:'96M short drama ads', result:'26 episodes · best 8',
    desc:'Short drama-style ads for 96M across several batches, cut for TikTok with fast hooks and burned-in subtitles.',
    roles:['Editor'], orient:'v',
    items:[...['m96_n1','m96_n2','m96_n3','m96_n4','m96_n5','wc_1','wc_4','b8_1'].map((k,i)=>({kind:'local', src:`media/${k}.mp4`, thumb:`media/${k}.jpg`, label:`96M · EP${String(i+1).padStart(2,'0')}`}))]},
-  {id:'wageujak', cats:['drama','corp'], client:'Korea · Ministry of Environment', title:'입천장 까지도록 와그작 · Web drama', result:'7 episodes · web drama',
+  {id:'wageujak', cover:'hero/vSJZLuK6TIw.jpg', cats:['korea'], client:'Korea · Ministry of Environment', title:'입천장 까지도록 와그작 · Web drama', result:'7 episodes · web drama',
    desc:'A romantic-comedy web drama series made for Korea\'s Ministry of Environment (2019), from episode 2 to the finale plus the full compilation.',
-   roles:['Editor'], orient:'h', link:'https://www.youtube.com/watch?v=JotU9QuORt8', items:[{...yt(["JotU9QuORt8"])[0],label:"EP2 · 물병자리의 퇴근 위기 · 34K views"},{...yt(["jEpzb_WyxLE"])[0],label:"EP3 · 뿌옇지만은 않았다 · 31K views"},{...yt(["Fgw9V8RtNxk"])[0],label:"EP4 · 샌드위치 위드 XXX"},{...yt(["cbfVdlD5gno"])[0],label:"EP5 · 우연하게도 불편한 재회"},{...yt(["vSJZLuK6TIw"])[0],label:"EP6 · 그녀의 연말정산 고백"},{...yt(["K08c5uhMihY"])[0],label:"EP7 · Finale 울고 웃고 만나고 헤어지고"},{...yt(["Vn4nMScdGlo"])[0],label:"Full series compilation · 84 min · 26K views"}]},
-  {id:'winbox', wideIn:['all'], cats:['drama','brand'], client:'Winbox · Entertainment', title:'Winbox branding films', result:'4K cinematic spots',
+   roles:['Editor'], orient:'h', link:'https://www.youtube.com/watch?v=JotU9QuORt8', items:[{...yt(["vSJZLuK6TIw"])[0],label:"EP6 · 그녀의 연말정산 고백"},{...yt(["JotU9QuORt8"])[0],label:"EP2 · 물병자리의 퇴근 위기 · 34K views"},{...yt(["jEpzb_WyxLE"])[0],label:"EP3 · 뿌옇지만은 않았다 · 31K views"},{...yt(["Fgw9V8RtNxk"])[0],label:"EP4 · 샌드위치 위드 XXX"},{...yt(["cbfVdlD5gno"])[0],label:"EP5 · 우연하게도 불편한 재회"},{...yt(["K08c5uhMihY"])[0],label:"EP7 · Finale 울고 웃고 만나고 헤어지고"},{...yt(["Vn4nMScdGlo"])[0],label:"Full series compilation · 84 min · 26K views"}]},
+  {id:'winbox', cats:['ent'], client:'Winbox · Entertainment', title:'Winbox branding films', result:'4K cinematic spots',
    desc:'Cinematic lifestyle spots with five talents and the LoopKL brand film, delivered in 15s and 30s cuts.',
-   roles:['Producer','Editor'], orient:'h', items:[{kind:'local', src:'media/wb_loopkl.mp4', thumb:'media/wb_loopkl.jpg', label:"Winbox LoopKL \u00b7 brand film"},{kind:'local', src:'media/wb_valent.mp4', thumb:'media/wb_valent.jpg', label:"Valent \u00b7 producer cut"},{kind:'local', src:'media/wb_diorwynn.mp4', thumb:'media/wb_diorwynn.jpg', label:"Diorwynn \u00b7 30s spot"},{kind:'local', src:'media/wb_josephy.mp4', thumb:'media/wb_josephy.jpg', label:"Josephy \u00b7 30s spot"},{kind:'local', src:'media/wb_peiyu.mp4', thumb:'media/wb_peiyu.jpg', label:"Pei Yu \u00b7 30s spot"}]},
-  {id:'eo', cats:['brand','live'], client:'ServAuto · Automotive', title:'ServAuto Engine Oil on TikTok', result:'12.3M views',
+   roles:['Producer','Editor'], orient:'h', items:[{kind:'local', src:'media/wb_valent.mp4', thumb:'media/wb_valent.jpg', label:"Valent \u00b7 producer cut"},{kind:'local', src:'media/wb_loopkl.mp4', thumb:'media/wb_loopkl.jpg', label:"Winbox LoopKL \u00b7 brand film"},{kind:'local', src:'media/wb_diorwynn.mp4', thumb:'media/wb_diorwynn.jpg', label:"Diorwynn \u00b7 30s spot"},{kind:'local', src:'media/wb_josephy.mp4', thumb:'media/wb_josephy.jpg', label:"Josephy \u00b7 30s spot"},{kind:'local', src:'media/wb_peiyu.mp4', thumb:'media/wb_peiyu.jpg', label:"Pei Yu \u00b7 30s spot"}]},
+  {id:'eo', cats:['ent'], client:'ServAuto · Automotive', title:'ServAuto Engine Oil on TikTok', result:'12.3M views',
    desc:'Promo, campaign and live-sale videos for @servauto.engineoil (57.7K followers).',
    roles:['Video editor','Live moderator','Producer'], orient:'v', link:'https://www.tiktok.com/@servauto.engineoil',
    items:tt('servauto.engineoil',[['7637432562742250760','tt_eo1','12.3M','RM169 car service'],['7703361174536064264','tt_eo2','55.7K','11.11 campaign'],['7703866185158298900','tt_eo3','39.4K','Live promo']])},
-  {id:'tint', cats:['brand','live'], client:'ServAuto · Automotive', title:'ServAuto Tint on TikTok', result:'8.1M views',
+  {id:'tint', cats:['ent'], client:'ServAuto · Automotive', title:'ServAuto Tint on TikTok', result:'8.1M views',
    desc:'Product, how-to and live-sale videos for @servauto.my (45.1K followers).',
    roles:['Video editor','Live moderator','Producer'], orient:'v', link:'https://www.tiktok.com/@servauto.my',
    items:tt('servauto.my',[['7553868263914999047','tt_my1','8.1M','Nano ceramic tint'],['7698291369692941588','tt_my2','44.4K','Tint step by step'],['7706456522213117190','tt_my3','42.9K','RM11.11 live deal']])},
-  {id:'kilang', cats:['live','design'], client:'Kilang Minuman · F&B', title:'Kilang Minuman live sales', result:'584.1K views',
+  {id:'kilang', cats:['ent'], client:'Kilang Minuman · F&B', title:'Kilang Minuman live sales', result:'584.1K views',
    desc:'Live-sale moderation and packaging design for a direct-from-factory beverage brand (212.4K followers).',
    roles:['Live moderator','Packaging design'], orient:'v', link:'https://www.tiktok.com/@kilangminuman',
    items:tt('kilangminuman',[['7704250198675115270','tt_km1','584.1K','Free gift live'],['7705255648807767316','tt_km2','342.2K','Buy 2kg in live'],['7637738838701444369','tt_km3','311.9K','Matcha packing POV'],['7702672069175020806','tt_km4','187K','Join live now']])},
@@ -485,54 +524,37 @@ const P = [
    desc:'Can label artwork for the Shoots water-kefir range, plus flavour menu cards made for Camar Resort.',
    roles:['Packaging design'], orient:'sq', link:'https://www.instagram.com/shootslivingvibration/',
    items:img(['can-1','can-2','can-3','can-6','camar-2','camar-3','camar-6','camar-7'],['Can label · Passion Fruit','Can label · Lemon Ginger','Can label · Hibiscus Rose','Can label · Vintage Cola','Camar Resort · Lychee','Camar Resort · Passion Fruit','Camar Resort · Peach Whirl','Camar Resort · Banana Vanilla'])},
-  {id:"dream", cats:["corp"], client:"Korea · 2018 PyeongChang Legacy Foundation", title:"2021 Dream Program Online Camp", result:"4 episodes \u00b7 Koreanet",
+  {id:"dream", cover:'hero/iFLBWMnVSrc.jpg', cats:['korea'], client:"Korea · 2018 PyeongChang Legacy Foundation", title:"2021 Dream Program Online Camp", result:"4 episodes \u00b7 Koreanet",
    desc:"An online camp series teaching winter sports and Korean culture to youth from countries without snow: home training, K-pop dance, vocal training and Taekwondo.",
    roles:["Editor"], orient:'h', link:"https://www.youtube.com/watch?v=kwhlaI4M9oI", items:[{...yt(["kwhlaI4M9oI"])[0],label:"Winter Sports Home Training"},{...yt(["aEi6UWywcts"])[0],label:"K-Pop Cover Dance"},{...yt(["2pdYjicpBXY"])[0],label:"EP3 · K-Pop Vocal Training"},{...yt(["iFLBWMnVSrc"])[0],label:"EP4 · Taekwondo"}]},
-  {id:"commercial", cats:["brand", "corp"], client:"Korea · Brands & events", title:"Commercials & branded content", result:"11 spots",
+  {id:"commercial", cats:['korea'], client:"Korea · Brands & events", title:"Commercials & branded content", result:"11 spots",
    desc:"Short ads and branded videos: a seafood festival promo, SC First Bank's Disney diary unboxing, a café ad, an eco-cleaning series and a car-leasing series.",
    roles:["Editor", "Videographer"], orient:'h', items:[{...yt(["ZdIoj9RoygI"])[0],label:"홍성 남당항 대하축제 · festival promo"},{...yt(["uqNqXyAL4No"])[0],label:"SC First Bank · Disney diary unboxing"},{...yt(["lR5rbtYNhJQ"])[0],label:"판교홍콩다방 · café ad"},{...yt(["R8cr5F52KzQ"])[0],label:"Eco cleaning · baking soda"},{...yt(["RKx77buW10k"])[0],label:"Eco cleaning · citric acid"},{...yt(["K1n7yy39wTo"])[0],label:"Eco cleaning · EM detergent"},{...yt(["78Mrd9xFVSg"])[0],label:"Eco cleaning · sodium percarbonate"},{...yt(["dhymzUso1B0"])[0],label:"Car leasing explained"},{...yt(["IUoc_GtuBzc"])[0],label:"Why a car dealer rents long-term"},{...yt(["ZOwia7ehShE"])[0],label:"Car leasing · zero upfront cost"},{...yt(["FYlx8k_4clw"])[0],label:"Insta concept trailer"}]},
-  {id:"scbank", cats:["corp"], client:"Korea · SC First Bank", title:"SC First Bank investment series", result:"4 episodes",
+  {id:"scbank", cover:'hero/izOqwXUcTXw.jpg', cats:['korea'], client:"Korea · SC First Bank", title:"SC First Bank investment series", result:"4 episodes",
    desc:"2020 investment-outlook series with the bank's strategists: dollar assets, asset strategy, portfolio investing and “Balancing Act”.",
    roles:["Videographer"], orient:'h', link:"https://www.youtube.com/watch?v=izOqwXUcTXw&list=PLQ3qswgrqsSavbdS8eOq8Rpct7qCgJFie", items:[{...yt(["izOqwXUcTXw"])[0],label:"Why you need dollar assets"},{...yt(["z_3LSlrK8YI"])[0],label:"Strategy by asset class"},{...yt(["kxn5O98oRiY"])[0],label:"Why portfolio investing matters"},{...yt(["JW6UewMIt1o"])[0],label:"Balancing Act"}]},
-  {id:"gov", cats:["corp"], client:"Korea · Government ministries", title:"Government content", result:"Best 12 of 21",
+  {id:"gov", cats:['korea'], client:"Korea · Government ministries", title:"Government content", result:"Best 12 of 21",
    desc:"Interviews, vlogs and campaign videos for the Ministry of Agriculture (MAFRA), Ministry of Economy & Finance and Ministry of Culture, Sports & Tourism.",
    roles:["Editor", "Videographer"], orient:'h', items:[{...yt(["z-IgmgTLwG4"])[0],label:"Minister's visit to Miryang"},{...yt(["O2LD1hn0ZSo"])[0],label:"MAFRA · CEO interview ep2"},{...yt(["vH5MPz8yADs"])[0],label:"MAFRA · CEO interview ep1"},{...yt(["13ghcWjnUmo"])[0],label:"Idols cheer Korea's horse industry"},{...yt(["fQ0L0HeISYg"])[0],label:"Ministry of Economy & Finance · EP01"},{...yt(["CKku_T0KX6k"])[0],label:"Vice Minister · mask sales visit"},{...yt(["5VPl2917NL0"])[0],label:"Civil servants try farming"},{...yt(["lcz5Gmh__Es"])[0],label:"It's My Job #2"},{...yt(["_BR4fZMd9rY"])[0],label:"Smart farm start-up"},{...yt(["w9dedGdlpMw"])[0],label:"Green New Deal quiz-log"},{...yt(["ioVouxVnkJk"])[0],label:"Culture Ministry vlog"},{...yt(["mTuATYZl7R8"])[0],label:"Youth series · artist insurance"}]},
-  {id:"health", cats:["corp"], client:"Korea · Healthcare", title:"Hospital & health content", result:"Best 12",
+  {id:"health", cats:['korea'], client:"Korea · Healthcare", title:"Hospital & health content", result:"Best 12",
    desc:"Doctor talk shows for Seoul National University Hospital and a full content line for the 365mc hospital group: parodies, interviews and events.",
    roles:["Editor", "Videographer"], orient:'h', items:[{...yt(["beQZVuD5aP8"])[0],label:"SNU Hospital · shoulder pain"},{...yt(["pabYqAooJJ4"])[0],label:"SNU Hospital · neck pain"},{...yt(["A4ZrUqv1XjU"])[0],label:"365mc · blind-date sketch"},{...yt(["-_8D-VbmiNA"])[0],label:"365mc · ad parody"},{...yt(["pH1KlHKjKbg"])[0],label:"365mc · surprise video letter"},{...yt(["vrD0vHVM3Yw"])[0],label:"365mc · 2019 year-end"},{...yt(["yAWkVjFwTCQ"])[0],label:"365mc Doctors · diet tips"},{...yt(["9Lla62wKilo"])[0],label:"365mc Doctors · stories"},{...yt(["8-wNxZVm62k"])[0],label:"365mc Doctors · design"},{...yt(["jJMVjhrgCOw"])[0],label:"365mc · global symposium"},{...yt(["-xCfvKjreDI"])[0],label:"365mc Doctors · book picks"},{...yt(["u_FeEaLoPXE"])[0],label:"Stem-cell therapy short"}]},
-  {id:"talk", cats:["corp", "drama"], client:"Korea · YouTube talk show", title:"Celebrity talk show episodes", result:"9 episodes",
+  {id:"talk", cats:['korea'], client:"Korea · YouTube talk show", title:"Celebrity talk show episodes", result:"9 episodes",
    desc:"Long-form talk episodes with comedians, a YouTuber and specialists, built on interviews and fast reaction cuts.",
    roles:["Editor", "Videographer"], orient:'h', items:[{...yt(["fbqrGLFM3-M"])[0],label:"What comedians did after Gag Concert"},{...yt(["L8nx9oE8enk"])[0],label:"Comedian turned car dealer"},{...yt(["nfZew0J9Xi4"])[0],label:"Comedian Byun Gi-su"},{...yt(["Ik0V-YLsB4M"])[0],label:"How much YouTuber Gomong earns"},{...yt(["jG660Z5K01s"])[0],label:"Life of a host-bar worker"},{...yt(["RgH3pMGVGho"])[0],label:"Inside a cult"},{...yt(["L0mBvo3tD8k"])[0],label:"Waxing instructor stories"},{...yt(["4-TxgOsVAsE"])[0],label:"Urologist Q&A"},{...yt(["2NLAD_KvZ2s"])[0],label:"Comedian Oh Ji-heon special"}]},
-  {id:"interview", cats:["corp"], client:"Korea · Interview formats", title:"“If they called you” & street interviews", result:"11 episodes",
+  {id:"interview", cats:['korea'], client:"Korea · Interview formats", title:"“If they called you” & street interviews", result:"11 episodes",
    desc:"Video-call surprise interviews with musical actor Kai, footballer Jo Won-hee and artists, plus the “Your Thoughts” street-question series.",
    roles:["Editor", "Videographer"], orient:'h', items:[{...yt(["81shU1oI4pE"])[0],label:"Musical actor Kai · video call"},{...yt(["x8V4zghy_Uk"])[0],label:"Musical actor Kai · surprise call"},{...yt(["Soc1RabgrqU"])[0],label:"Footballer Jo Won-hee"},{...yt(["J515mzReAz8"])[0],label:"Painter Kim Hyun-jung"},{...yt(["aCIm2W7Y_Lc"])[0],label:"Webtoon artist · how to start"},{...yt(["nk6dZBbrK3c"])[0],label:"Webtoon artist · surprise call"},{...yt(["PWZNDSXR03k"])[0],label:"Your life comic?"},{...yt(["Tbw_3uKz89I"])[0],label:"Sports star who moved you"},{...yt(["xIDqOYu2D2g"])[0],label:"Favourite Korean travel spot"},{...yt(["yTiQ0xkaBUA"])[0],label:"What workout do you do?"},{...yt(["KESd6omjOlE"])[0],label:"Hallyu stars and Korean products"}]},
-  {id:"films", cats:["drama", "corp"], client:"Taiwan & Korea · Personal work", title:"Short films & documentaries", result:"5 films",
+  {id:"films", cats:['korea'], client:"Taiwan & Korea · Personal work", title:"Short films & documentaries", result:"5 films",
    desc:"Personal short films and documentaries made while studying in Taiwan and Korea, including the 27-minute documentary 我们的家.",
    roles:["Editor", "Videographer"], orient:'h', items:[{...yt(["XOjE1UdE2ts"])[0],label:"我们的家 · documentary · 27 min"},{...yt(["jOAoc0sTOLY"])[0],label:"番花路75巷 · short film"},{...yt(["TAIdYZdCqoI"])[0],label:"나의 색깔 · short film"},{...yt(["za52h9TCBwo"])[0],label:"권대기 · short film"},{...yt(["OMf1C6_x3VA"])[0],label:"외달도 · travel vlog"}]},
 ];
 const byId = Object.fromEntries(P.map(p => [p.id, p]));
 
-const IND = [
-  ['Music & Entertainment','Namewee 黃明志','music'],
-  ['Entertainment','谁是王者 YYDS, 96M, Winbox','drama'],
-  ['Automotive','ServAuto','brand'],
-  ['F&B / Beverage','Kilang Minuman, Shoots Living Vibration','design'],
-  ['Government','Korean ministries: MAFRA, Environment, Economy & Finance','corp'],
-  ['Banking & Finance','SC First Bank','corp'],
-  ['Healthcare','Seoul National University Hospital, 365mc','corp'],
-  ['Culture & Sports','2018 PyeongChang Legacy Foundation','corp'],
-  ['Talk shows & Web drama','Korean YouTube channels, Ministry of Environment','corp'],
-];
-
-// selected: [projectId, itemIndex, custom result]
-const SEL = [
-  ['eo',0,'12.3M views'],['tint',0,'8.1M views'],['fragile',0,'77.7M views · #1 trending in 4 countries'],
-  ['m96',0,'26 episodes edited'],['yyds',null,'26 episodes · editor & planner'],['shootsv',3,'Packaging & key visuals'],
-];
-
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 function coverHTML(p, pickIdx){
   const it = p.items;
+  if (p.cover && pickIdx == null) return Array.isArray(p.cover) ? `<div class="cover trio">${p.cover.map(s=>`<img src="${s}" alt="" loading="lazy">`).join('')}` : `<div class="cover"><img src="${p.cover}" alt="" loading="lazy">`;
   if (it[0].kind === 'img') return `<div class="cover quad">${it.slice(0,4).map(x=>`<img src="${x.thumb}" alt="" loading="lazy">`).join('')}`;
   if (p.orient === 'v' && pickIdx == null) {
     return `<div class="cover trio">${it.slice(0,3).map(x=>`<img src="${x.thumb}" alt="" loading="lazy">`).join('')}`;
@@ -550,21 +572,28 @@ function cardHTML(p, opts={}){
     <div class="roles">${p.roles.map(r=>`<span>${esc(r)}</span>`).join('')}</div></div></button>`;
 }
 
-document.getElementById('inds').innerHTML = IND.map(([b,s,c]) => `<button class="ind" type="button" data-cat="${c}"><b>${esc(b)}</b><span>${esc(s)}</span></button>`).join('');
-document.getElementById('sel').innerHTML = SEL.map(([id,i,r]) => cardHTML(byId[id], {pick:i, result:r})).join('');
-
 let cur = 'all';
 function renderGrid(){
-  const list = P.filter(p => cur==='all' || p.cats.includes(cur));
-  document.getElementById('grid').innerHTML = list.map(p => cardHTML(p, {wide: (p.wideIn||[]).includes(cur)})).join('');
+  const vids = P.filter(p => p.cats[0] !== 'design' && (cur==='all' || p.cats.includes(cur)));
+  const grid = document.getElementById('grid');
+  grid.hidden = cur === 'design';
+  grid.innerHTML = cur==='design' ? '' : vids.map(p => cardHTML(p, {wide: (p.wideIn||[]).includes(cur)})).join('');
+  document.getElementById('dwall').hidden = !(cur==='all' || cur==='design');
+  const sb = document.getElementById('subbar');
+  if (cur==='all' || cur==='design') { sb.hidden = true; sb.innerHTML=''; }
+  else { sb.hidden = false; sb.innerHTML = `<span class="mono">Jump to project</span>` + vids.map(p=>`<button type="button" data-p="${p.id}">${esc(p.title)}</button>`).join(''); }
   document.querySelectorAll('.chip').forEach(c => c.setAttribute('aria-pressed', c.dataset.cat===cur));
 }
+document.getElementById('subbar').addEventListener('click', e => { const b=e.target.closest('button'); if(!b) return; const p=byId[b.dataset.p]; openProject(p.id, p.cats[0]==='music'||p.orient==='h' ? 0 : null); });
+// design wall
+document.getElementById('dwall').innerHTML = `<div class="dwall-head"><h3>Design work</h3><span class="mono">Packaging · key visuals · posters · menu cards</span></div>` +
+  P.filter(p=>p.cats[0]==='design').map(p => `<div class="dset"><h4>${esc(p.title)}</h4><p>${esc(p.desc)}</p><div class="dmasonry">${p.items.map((x,i)=>`<button type="button" data-p="${p.id}" data-i="${i}" aria-label="View ${esc(x.label)} full screen"><img src="${x.thumb}" alt="${esc(x.label)}" loading="lazy"><span>${esc(x.label)}</span></button>`).join('')}</div></div>`).join('');
+document.getElementById('dwall').addEventListener('click', e => { const b=e.target.closest('button[data-p]'); if(!b) return; openP = byId[b.dataset.p]; openLbx(+b.dataset.i); });
 document.getElementById('filters').innerHTML = CATS.map(([k,t]) => {
   const n = k==='all' ? P.length : P.filter(p=>p.cats.includes(k)).length;
   return `<button class="chip" type="button" data-cat="${k}" aria-pressed="false">${esc(t)}<small>${n}</small></button>`;
 }).join('');
 document.getElementById('filters').addEventListener('click', e => { const b=e.target.closest('.chip'); if(!b) return; cur=b.dataset.cat; renderGrid(); });
-document.getElementById('inds').addEventListener('click', e => { const b=e.target.closest('.ind'); if(!b) return; cur=b.dataset.cat; renderGrid(); document.getElementById('work').scrollIntoView(); });
 renderGrid();
 
 document.querySelectorAll('a.wa').forEach(a=>{a.href=WA;a.target='_blank';a.rel='noopener'});
@@ -574,9 +603,51 @@ document.querySelector('.lang-tabs').addEventListener('click', e => {
   document.querySelectorAll('.lang-tabs button').forEach(x => x.setAttribute('aria-selected', x===b));
   document.querySelectorAll('.lang').forEach(p => p.hidden = p.dataset.l !== b.dataset.l);
 });
-// hero sound
-const hv = document.getElementById('heroVid'), um = document.getElementById('unmute');
-um.addEventListener('click', () => { hv.muted = !hv.muted; if(!hv.muted){ hv.currentTime=0; hv.play().catch(()=>{}); } um.textContent = hv.muted ? '🔊 Sound on' : '🔇 Mute'; });
+// hero showreel: 50% Namewee, 30% Korea, 20% other work
+const REEL = [
+  {p:'fragile', yt:'-Rp7UPbhErE', s:62, img:'hero/-Rp7UPbhErE.jpg', t:'Fragile 玻璃心 · 77.7M views'},
+  {p:'wageujak', yt:'vSJZLuK6TIw', s:95, img:'hero/vSJZLuK6TIw.jpg', t:'와그작 web drama · EP6', i:0},
+  {p:'tenmen', yt:'ickj4DT5S3U', s:48, img:'hero/ickj4DT5S3U.jpg', t:'十個男人 · 6.7M views'},
+  {p:'m96', src:'media/m96_n2.mp4', img:'media/m96_n2.jpg', s:8, t:'96M short drama ad', i:1},
+  {p:'wall', yt:'WCLlFA9SiDI', s:75, img:'hero/WCLlFA9SiDI.jpg', t:'牆外 · 17.6M views'},
+  {p:'dream', yt:'iFLBWMnVSrc', s:240, img:'hero/iFLBWMnVSrc.jpg', t:'Dream Program · Taekwondo', i:3},
+  {p:'curry', yt:'LPB6fUlNAqc', s:58, img:'hero/LPB6fUlNAqc.jpg', t:'Curry & Roti · 8.7M views'},
+  {p:'winbox', src:'media/wb_valent.mp4', img:'media/wb_valent.jpg', s:3, t:'Winbox · Valent producer cut', i:0},
+  {p:'hater', yt:'xyos93gW5e4', s:42, img:'hero/xyos93gW5e4.jpg', t:'Hello Hater · 2.2M views'},
+  {p:'scbank', yt:'izOqwXUcTXw', s:20, img:'hero/izOqwXUcTXw.jpg', t:'SC First Bank investment series', i:0},
+];
+const DUR = 7000;
+const screen = document.getElementById('reelScreen'), bar = document.getElementById('reelBar');
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+bar.style.setProperty('--dur', DUR+'ms');
+bar.innerHTML = REEL.map((_,i)=>`<button type="button" aria-label="Show clip ${i+1}"></button>`).join('');
+let ri = -1, rTimer = null, paused = false;
+function layerFor(r){
+  const L = document.createElement('div'); L.className = 'reel-layer';
+  if (r.yt && CAN_EMBED) L.innerHTML = `<img class="bg" src="${r.img}" alt=""><iframe src="https://www.youtube-nocookie.com/embed/${r.yt}?autoplay=1&mute=1&controls=0&playsinline=1&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1&start=${r.s}&end=${r.s+9}" allow="autoplay; encrypted-media" tabindex="-1" title=""></iframe>`;
+  else if (r.src) L.innerHTML = `<img class="bg" src="${r.img}" alt=""><video class="fg" src="${r.src}#t=${r.s}" poster="${r.img}" muted autoplay playsinline preload="auto"></video>`;
+  else L.innerHTML = `<img class="still" src="${r.img}" alt="">`;
+  return L;
+}
+function showReel(i){
+  ri = (i + REEL.length) % REEL.length; const r = REEL[ri];
+  const old = [...screen.children];
+  const L = layerFor(r); screen.appendChild(L);
+  requestAnimationFrame(()=>requestAnimationFrame(()=>L.classList.add('on')));
+  setTimeout(()=>old.forEach(o=>o.remove()), 900);
+  const p = byId[r.p];
+  document.getElementById('reelClient').textContent = p.client;
+  document.getElementById('reelTitle').textContent = r.t;
+  [...bar.children].forEach((b,k)=>{ b.classList.toggle('on', k===ri); b.classList.toggle('done', k<ri); });
+  clearTimeout(rTimer); if (!paused && !reduce) rTimer = setTimeout(()=>showReel(ri+1), DUR);
+}
+bar.addEventListener('click', e => { const b=e.target.closest('button'); if(!b) return; showReel([...bar.children].indexOf(b)); });
+function openReel(){ const r = REEL[ri]; const p = byId[r.p]; paused = true; clearTimeout(rTimer); screen.innerHTML=''; openProject(p.id, r.i ?? 0); }
+document.getElementById('reelCap').addEventListener('click', openReel);
+screen.addEventListener('click', openReel);
+showReel(0);
+function pauseReel(){ paused = true; clearTimeout(rTimer); screen.querySelectorAll('video').forEach(v=>v.pause()); screen.querySelectorAll('iframe').forEach(f=>f.remove()); }
+function resumeReel(){ if(!paused) return; paused = false; showReel(ri); }
 
 // modal
 const dlg = document.getElementById('dlg'), stage = document.getElementById('stage'), itemsEl = document.getElementById('items');
@@ -620,7 +691,7 @@ itemsEl.addEventListener('click', e => {
 });
 document.addEventListener('click', e => {
   const c = e.target.closest('.card'); if(!c) return;
-  hv.pause();
+  pauseReel();
   openProject(c.dataset.p, c.dataset.i!=null ? +c.dataset.i : (byId[c.dataset.p].cats.includes('music') ? 0 : null));
 });
 // lightbox for designs
@@ -643,5 +714,5 @@ lbx.addEventListener('touchend', e => { if (tx==null) return; const d = e.change
 function closeDlg(){ stage.innerHTML=''; dlg.close(); }
 document.getElementById('dlg-x').addEventListener('click', closeDlg);
 dlg.addEventListener('click', e => { if (e.target === dlg) closeDlg(); });
-dlg.addEventListener('close', () => { stage.innerHTML=''; });
+dlg.addEventListener('close', () => { stage.innerHTML=''; resumeReel(); });
 </script>
