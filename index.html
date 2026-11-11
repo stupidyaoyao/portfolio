@@ -238,7 +238,7 @@ dialog::backdrop{background:var(--scrim)}
       <div class="stats">
         <div><b>77.7M</b><span class="mono">Top MV views</span></div>
         <div><b>12.3M</b><span class="mono">Top TikTok views</span></div>
-        <div><b>160+</b><span class="mono">Videos edited &amp; shot</span></div>
+        <div><b>170+</b><span class="mono">Videos edited &amp; shot</span></div>
         <div><b>8 yrs</b><span class="mono">Editing since 2018</span></div>
       </div>
     </div>
@@ -379,7 +379,7 @@ const local = (pre, n, label) => Array.from({length:n}, (_, i) => ({kind:'local'
 const CATS = [
   ['all','All'],
   ['music','Music Video & BTS'],
-  ['drama','Short Drama & Series'],
+  ['drama','Entertainment & Drama'],
   ['brand','Brand Ads & TikTok'],
   ['live','Live Commerce'],
   ['corp','Corporate · Korea'],
@@ -387,7 +387,7 @@ const CATS = [
 ];
 
 const P = [
-  {id:"fragile", wideIn:'music', cats:['music'], client:'Namewee 黃明志', title:"Fragile 玻璃心", result:"77.7M views",
+  {id:"fragile", wideIn:['music','all'], cats:['music'], client:'Namewee 黃明志', title:"Fragile 玻璃心", result:"77.7M views",
    desc:"ft. Kimberley Chen 陳芳語. #1 trending in Taiwan, Hong Kong, Singapore and Malaysia.",
    roles:['Production editor'], orient:'h', link:'https://www.youtube.com/watch?v=-Rp7UPbhErE', items:[{...yt(["-Rp7UPbhErE"])[0],label:"Official MV · 77.7M views"},{...yt(["TTd7M9QjM3M"])[0],label:"Making Of"},{...yt(["oX3D9HTc7I8"])[0],label:"Taiwanese YouTuber Reaction"}]},
   {id:"wall", cats:['music'], client:'Namewee 黃明志', title:"牆外 Beyond the Wall", result:"17.6M views",
@@ -428,6 +428,12 @@ const P = [
    desc:'Short drama-style ads for 96M across several batches, cut for TikTok with fast hooks and burned-in subtitles.',
    roles:['Editor'], orient:'v',
    items:[...['m96_n1','m96_n2','m96_n3','m96_n4','m96_n5','wc_1','wc_4','b8_1'].map((k,i)=>({kind:'local', src:`media/${k}.mp4`, thumb:`media/${k}.jpg`, label:`96M · EP${String(i+1).padStart(2,'0')}`}))]},
+  {id:'wageujak', cats:['drama','corp'], client:'Korea · Ministry of Environment', title:'입천장 까지도록 와그작 · Web drama', result:'7 episodes · web drama',
+   desc:'A romantic-comedy web drama series made for Korea\'s Ministry of Environment (2019), from episode 2 to the finale plus the full compilation.',
+   roles:['Editor'], orient:'h', link:'https://www.youtube.com/watch?v=JotU9QuORt8', items:[{...yt(["JotU9QuORt8"])[0],label:"EP2 · 물병자리의 퇴근 위기 · 34K views"},{...yt(["jEpzb_WyxLE"])[0],label:"EP3 · 뿌옇지만은 않았다 · 31K views"},{...yt(["Fgw9V8RtNxk"])[0],label:"EP4 · 샌드위치 위드 XXX"},{...yt(["cbfVdlD5gno"])[0],label:"EP5 · 우연하게도 불편한 재회"},{...yt(["vSJZLuK6TIw"])[0],label:"EP6 · 그녀의 연말정산 고백"},{...yt(["K08c5uhMihY"])[0],label:"EP7 · Finale 울고 웃고 만나고 헤어지고"},{...yt(["Vn4nMScdGlo"])[0],label:"Full series compilation · 84 min · 26K views"}]},
+  {id:'winbox', cats:['drama','brand'], client:'Winbox · Entertainment', title:'Winbox branding films', result:'4K cinematic spots',
+   desc:'Cinematic lifestyle spots with five talents and the LoopKL brand film, delivered in 15s and 30s cuts.',
+   roles:['Producer','Editor'], orient:'h', items:[{kind:'local', src:'media/wb_loopkl.mp4', thumb:'media/wb_loopkl.jpg', label:"Winbox LoopKL \u00b7 brand film"},{kind:'local', src:'media/wb_valent.mp4', thumb:'media/wb_valent.jpg', label:"Valent \u00b7 producer cut"},{kind:'local', src:'media/wb_diorwynn.mp4', thumb:'media/wb_diorwynn.jpg', label:"Diorwynn \u00b7 30s spot"},{kind:'local', src:'media/wb_josephy.mp4', thumb:'media/wb_josephy.jpg', label:"Josephy \u00b7 30s spot"},{kind:'local', src:'media/wb_peiyu.mp4', thumb:'media/wb_peiyu.jpg', label:"Pei Yu \u00b7 30s spot"}]},
   {id:'eo', cats:['brand','live'], client:'ServAuto · Automotive', title:'ServAuto Engine Oil on TikTok', result:'12.3M views',
    desc:'Promo, campaign and live-sale videos for @servauto.engineoil (57.7K followers).',
    roles:['Video editor','Live moderator','Producer'], orient:'v', link:'https://www.tiktok.com/@servauto.engineoil',
@@ -463,10 +469,10 @@ const byId = Object.fromEntries(P.map(p => [p.id, p]));
 const IND = [
   ['Music & Entertainment','Namewee 黃明志','music'],
   ['Automotive','ServAuto','brand'],
-  ['Government','MAFRA Korea','corp'],
+  ['Government','MAFRA Korea, Ministry of Environment','corp'],
   ['Banking & Finance','SC First Bank','corp'],
   ['F&B / Beverage','Kilang Minuman, Shoots Living Vibration','design'],
-  ['Entertainment Series','谁是王者 YYDS, 96M','drama'],
+  ['Entertainment','谁是王者 YYDS, 96M, Winbox','drama'],
 ];
 
 // selected: [projectId, itemIndex, custom result]
@@ -500,7 +506,7 @@ document.getElementById('sel').innerHTML = SEL.map(([id,i,r]) => cardHTML(byId[i
 let cur = 'all';
 function renderGrid(){
   const list = P.filter(p => cur==='all' || p.cats.includes(cur));
-  document.getElementById('grid').innerHTML = list.map(p => cardHTML(p, {wide: p.wideIn===cur})).join('');
+  document.getElementById('grid').innerHTML = list.map(p => cardHTML(p, {wide: (p.wideIn||[]).includes(cur)})).join('');
   document.querySelectorAll('.chip').forEach(c => c.setAttribute('aria-pressed', c.dataset.cat===cur));
 }
 document.getElementById('filters').innerHTML = CATS.map(([k,t]) => {
