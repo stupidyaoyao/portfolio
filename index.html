@@ -150,6 +150,27 @@ section.block{padding-block:56px 8px}
 .edu span:not(.mono){color:var(--muted);font-size:14px}
 footer{padding-block:24px 40px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 
+/* design galleries */
+.cover.quad{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:2px;background:var(--panel)}
+.cover.quad img{width:100%;height:100%;object-fit:cover;min-height:0}
+.cover .view{position:absolute;right:12px;bottom:12px;display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.95);color:#1A0F0A;font-weight:800;font-size:13px;padding:8px 12px;border-radius:999px;box-shadow:0 6px 16px rgba(0,0,0,.3)}
+.items.gal{display:block;columns:3 200px;column-gap:14px}
+.items.gal .item{break-inside:avoid;margin:0 0 14px;background:var(--panel);border-radius:12px;cursor:zoom-in}
+.items.gal .item img{aspect-ratio:auto;height:auto}
+.items.gal .lbl{position:static;display:block;background:none;color:var(--muted);padding:8px 10px;white-space:normal}
+#lbx{max-width:100vw;max-height:100dvh;width:100vw;height:100dvh;margin:0;background:transparent}
+#lbx::backdrop{background:rgba(8,5,4,.94)}
+.lbx-in{position:relative;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:calc(56px + env(safe-area-inset-top,0px)) max(64px,env(safe-area-inset-right,0px)) calc(24px + env(safe-area-inset-bottom,0px)) max(64px,env(safe-area-inset-left,0px))}
+.lbx-in img{max-width:100%;max-height:calc(100dvh - 140px);object-fit:contain;border-radius:8px;box-shadow:0 30px 80px rgba(0,0,0,.6);background:#fff}
+.lbx-cap{color:#FFF6EE;font-weight:700;font-size:15px;text-align:center}
+.lbx-cap span{font-family:var(--mono);font-weight:400;font-size:12px;color:#C4B0A5;margin-left:10px}
+.lbx-btn{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;border-radius:50%;border:0;background:rgba(255,255,255,.14);color:#fff;font-size:24px;cursor:pointer}
+.lbx-btn:hover{background:var(--grad)}
+.lbx-prev{left:max(12px,env(safe-area-inset-left,0px))}
+.lbx-next{right:max(12px,env(safe-area-inset-right,0px))}
+.lbx-x{position:absolute;top:calc(12px + env(safe-area-inset-top,0px));right:max(12px,env(safe-area-inset-right,0px));width:44px;height:44px;border-radius:50%;border:0;background:rgba(255,255,255,.14);color:#fff;font-size:22px;cursor:pointer}
+@media (max-width:560px){.lbx-in{padding-left:12px;padding-right:12px}.lbx-btn{top:auto;bottom:calc(16px + env(safe-area-inset-bottom,0px));transform:none}}
+
 /* contact */
 .contact{background-image:radial-gradient(120% 140% at 100% 0%,color-mix(in srgb,var(--accent-2) 22%,transparent),transparent 60%),radial-gradient(90% 120% at 0% 100%,color-mix(in srgb,var(--accent) 20%,transparent),transparent 60%);display:grid;grid-template-columns:1.2fr .8fr;gap:32px;align-items:center;padding:36px;margin-block:8px 48px;border-radius:20px;background:var(--panel);border:1px solid var(--line)}
 .contact h2{font-family:var(--display);font-stretch:112%;font-weight:800;font-size:clamp(24px,3.2vw,34px);line-height:1.15;margin:8px 0 12px}
@@ -360,6 +381,16 @@ dialog::backdrop{background:var(--scrim)}
   </div>
 </dialog>
 
+<dialog id="lbx" aria-label="Design viewer">
+  <div class="lbx-in">
+    <button class="lbx-x" id="lbx-x" type="button" aria-label="Close">×</button>
+    <button class="lbx-btn lbx-prev" id="lbx-prev" type="button" aria-label="Previous design">←</button>
+    <img id="lbx-img" alt="">
+    <div class="lbx-cap" id="lbx-cap"></div>
+    <button class="lbx-btn lbx-next" id="lbx-next" type="button" aria-label="Next design">→</button>
+  </div>
+</dialog>
+
 <script>
 const L = {"showreel": ["z-IgmgTLwG4", "u_FeEaLoPXE", "beQZVuD5aP8", "pabYqAooJJ4", "lcz5Gmh__Es", "_BR4fZMd9rY", "J9EukfPzSXM", "SR3RG3KazjI"], "editing": ["O2LD1hn0ZSo", "kjdPRSiWTdI", "vH5MPz8yADs", "ioVouxVnkJk", "BrYBsRfdcTY", "K9rFY1vBZoE", "13ghcWjnUmo", "CKku_T0KX6k", "S2DKjwouSYM", "A4ZrUqv1XjU", "z9C1KhCYKjc", "-_8D-VbmiNA", "pH1KlHKjKbg", "vrD0vHVM3Yw", "l1VNmcLwIpE", "1o4BiE-gpMc", "RIfmpxJDLxk", "jJMVjhrgCOw", "-xCfvKjreDI", "yAWkVjFwTCQ", "9Lla62wKilo", "8-wNxZVm62k", "ZdIoj9RoygI", "uqNqXyAL4No", "dhymzUso1B0", "IUoc_GtuBzc", "ZOwia7ehShE", "5VPl2917NL0", "XOjE1UdE2ts", "OMf1C6_x3VA", "FYlx8k_4clw", "2NLAD_KvZ2s", "fbqrGLFM3-M", "L0mBvo3tD8k", "L8nx9oE8enk", "nfZew0J9Xi4", "4-TxgOsVAsE", "Ik0V-YLsB4M", "xIDqOYu2D2g", "KESd6omjOlE", "lR5rbtYNhJQ"], "camera": ["izOqwXUcTXw", "z_3LSlrK8YI", "kxn5O98oRiY", "JW6UewMIt1o", "PWZNDSXR03k", "O2LD1hn0ZSo", "kjdPRSiWTdI", "ABT6QZ0C9GU", "vH5MPz8yADs", "K9rFY1vBZoE", "A4ZrUqv1XjU", "-_8D-VbmiNA", "pH1KlHKjKbg", "vrD0vHVM3Yw", "-xCfvKjreDI", "yAWkVjFwTCQ", "9Lla62wKilo", "8-wNxZVm62k", "ZdIoj9RoygI", "uqNqXyAL4No", "dhymzUso1B0", "IUoc_GtuBzc", "ZOwia7ehShE", "R8cr5F52KzQ", "RKx77buW10k", "K1n7yy39wTo", "78Mrd9xFVSg", "5VPl2917NL0", "XOjE1UdE2ts", "OMf1C6_x3VA", "za52h9TCBwo", "FYlx8k_4clw", "jOAoc0sTOLY", "TAIdYZdCqoI", "Soc1RabgrqU", "mTuATYZl7R8", "c0GFdWwIf8M", "2NLAD_KvZ2s", "fbqrGLFM3-M", "L0mBvo3tD8k", "jG660Z5K01s", "L8nx9oE8enk", "nfZew0J9Xi4", "RgH3pMGVGho", "4-TxgOsVAsE", "Ik0V-YLsB4M", "yTiQ0xkaBUA", "Tbw_3uKz89I", "xIDqOYu2D2g", "KESd6omjOlE", "J515mzReAz8", "aCIm2W7Y_Lc", "nk6dZBbrK3c", "81shU1oI4pE", "x8V4zghy_Uk", "w9dedGdlpMw", "fQ0L0HeISYg"], "yyds": ["jip910WVuY4", "OXFfIi4EMJc", "zcFq6ZZnSdY", "s7Gpl601o_s", "qGRCeKL4v04", "EuucG2LaB9E", "uVkgr-fIyx4", "jqjEHf8UdVU", "XF3OL_Yk_w8", "6Jr3wYdJ3Sg", "XICKworFbhU", "RWu85yKRLow", "o3HUuNe43lU", "vyOqAWrPPZA", "2wRs3W53Tzg", "OZl-AlobsDI", "Z779BItk5js", "89lvD-1Zqxg", "7oVW-0O3Wl0", "qUKeeKeEtI8", "1sCX4dLZOXE", "FN5TEZMKyZ4", "yKYcyhScjsI", "E3bsRSfdMAM", "2W9po6RpUc0", "qE0olaZWoN8"]};
 const BEST = {
@@ -382,7 +413,7 @@ const CATS = [
   ['drama','Entertainment & Drama'],
   ['brand','Commercials & Brand Ads'],
   ['live','Live Commerce'],
-  ['corp','Corporate · Korea'],
+  ['corp','Korea work'],
   ['design','Design & Social'],
 ];
 
@@ -431,13 +462,9 @@ const P = [
   {id:'wageujak', cats:['drama','corp'], client:'Korea · Ministry of Environment', title:'입천장 까지도록 와그작 · Web drama', result:'7 episodes · web drama',
    desc:'A romantic-comedy web drama series made for Korea\'s Ministry of Environment (2019), from episode 2 to the finale plus the full compilation.',
    roles:['Editor'], orient:'h', link:'https://www.youtube.com/watch?v=JotU9QuORt8', items:[{...yt(["JotU9QuORt8"])[0],label:"EP2 · 물병자리의 퇴근 위기 · 34K views"},{...yt(["jEpzb_WyxLE"])[0],label:"EP3 · 뿌옇지만은 않았다 · 31K views"},{...yt(["Fgw9V8RtNxk"])[0],label:"EP4 · 샌드위치 위드 XXX"},{...yt(["cbfVdlD5gno"])[0],label:"EP5 · 우연하게도 불편한 재회"},{...yt(["vSJZLuK6TIw"])[0],label:"EP6 · 그녀의 연말정산 고백"},{...yt(["K08c5uhMihY"])[0],label:"EP7 · Finale 울고 웃고 만나고 헤어지고"},{...yt(["Vn4nMScdGlo"])[0],label:"Full series compilation · 84 min · 26K views"}]},
-  {id:'winbox', cats:['drama','brand'], client:'Winbox · Entertainment', title:'Winbox branding films', result:'4K cinematic spots',
+  {id:'winbox', wideIn:['all'], cats:['drama','brand'], client:'Winbox · Entertainment', title:'Winbox branding films', result:'4K cinematic spots',
    desc:'Cinematic lifestyle spots with five talents and the LoopKL brand film, delivered in 15s and 30s cuts.',
    roles:['Producer','Editor'], orient:'h', items:[{kind:'local', src:'media/wb_loopkl.mp4', thumb:'media/wb_loopkl.jpg', label:"Winbox LoopKL \u00b7 brand film"},{kind:'local', src:'media/wb_valent.mp4', thumb:'media/wb_valent.jpg', label:"Valent \u00b7 producer cut"},{kind:'local', src:'media/wb_diorwynn.mp4', thumb:'media/wb_diorwynn.jpg', label:"Diorwynn \u00b7 30s spot"},{kind:'local', src:'media/wb_josephy.mp4', thumb:'media/wb_josephy.jpg', label:"Josephy \u00b7 30s spot"},{kind:'local', src:'media/wb_peiyu.mp4', thumb:'media/wb_peiyu.jpg', label:"Pei Yu \u00b7 30s spot"}]},
-  {id:'krad', cats:['brand','corp'], client:'Korea · Commercials', title:'Korean commercials', result:'TV-style spots',
-   desc:'A promo spot for the 24th Hongseong Namdanghang Shrimp Festival and a limited-edition Disney diary unboxing film produced exclusively for SC First Bank.',
-   roles:['Editor','Videographer'], orient:'h', link:'https://www.youtube.com/watch?v=ZdIoj9RoygI',
-   items:[{...yt(['ZdIoj9RoygI'])[0],label:'Hongseong Namdanghang Shrimp Festival · 31s spot'},{...yt(['uqNqXyAL4No'])[0],label:'SC First Bank × Disney diary · unboxing film'}]},
   {id:'eo', cats:['brand','live'], client:'ServAuto · Automotive', title:'ServAuto Engine Oil on TikTok', result:'12.3M views',
    desc:'Promo, campaign and live-sale videos for @servauto.engineoil (57.7K followers).',
    roles:['Video editor','Live moderator','Producer'], orient:'v', link:'https://www.tiktok.com/@servauto.engineoil',
@@ -458,25 +485,43 @@ const P = [
    desc:'Can label artwork for the Shoots water-kefir range, plus flavour menu cards made for Camar Resort.',
    roles:['Packaging design'], orient:'sq', link:'https://www.instagram.com/shootslivingvibration/',
    items:img(['can-1','can-2','can-3','can-6','camar-2','camar-3','camar-6','camar-7'],['Can label · Passion Fruit','Can label · Lemon Ginger','Can label · Hibiscus Rose','Can label · Vintage Cola','Camar Resort · Lychee','Camar Resort · Passion Fruit','Camar Resort · Peach Whirl','Camar Resort · Banana Vanilla'])},
-  {id:'showreel', cats:['corp'], client:'Korea · Selected', title:'Frank_Editor showreel', result:'8 picks',
-   desc:'Health talk shows for Seoul National University Hospital, a ministerial vlog and short campaign clips.',
-   roles:['Editor'], orient:'h', link:'https://www.youtube.com/playlist?list=PLQ3qswgrqsSZdtCbacJItLCkv7FulVsLV', items:yt(L.showreel)},
-  {id:'editing', cats:['corp'], client:'Korea · Government & healthcare', title:'Editing projects 後製', result:`Best 12 of ${L.editing.length}`,
-   desc:'Ministry of Agriculture (MAFRA), Ministry of Culture and Ministry of Economy & Finance content, 365mc hospital, car-leasing and talk-show episodes.',
-   roles:['Editor'], orient:'h', link:'https://www.youtube.com/playlist?list=PLQ3qswgrqsSZvWn8757hiYIJjU5114C8q', items:yt(BEST.editing)},
-  {id:'camera', cats:['corp'], client:'Korea · Banking & media', title:'Videographer projects 拍攝', result:`Best 12 of ${L.camera.length}`,
-   desc:'SC First Bank investment series, celebrity interview formats, documentaries and brand films shot in Korea.',
-   roles:['Videographer'], orient:'h', link:'https://www.youtube.com/playlist?list=PLQ3qswgrqsSavbdS8eOq8Rpct7qCgJFie', items:yt(BEST.camera)},
+  {id:"dream", cats:["corp"], client:"Korea · 2018 PyeongChang Legacy Foundation", title:"2021 Dream Program Online Camp", result:"4 episodes \u00b7 Koreanet",
+   desc:"An online camp series teaching winter sports and Korean culture to youth from countries without snow: home training, K-pop dance, vocal training and Taekwondo.",
+   roles:["Editor"], orient:'h', link:"https://www.youtube.com/watch?v=kwhlaI4M9oI", items:[{...yt(["kwhlaI4M9oI"])[0],label:"Winter Sports Home Training"},{...yt(["aEi6UWywcts"])[0],label:"K-Pop Cover Dance"},{...yt(["2pdYjicpBXY"])[0],label:"EP3 · K-Pop Vocal Training"},{...yt(["iFLBWMnVSrc"])[0],label:"EP4 · Taekwondo"}]},
+  {id:"commercial", cats:["brand", "corp"], client:"Korea · Brands & events", title:"Commercials & branded content", result:"11 spots",
+   desc:"Short ads and branded videos: a seafood festival promo, SC First Bank's Disney diary unboxing, a café ad, an eco-cleaning series and a car-leasing series.",
+   roles:["Editor", "Videographer"], orient:'h', items:[{...yt(["ZdIoj9RoygI"])[0],label:"홍성 남당항 대하축제 · festival promo"},{...yt(["uqNqXyAL4No"])[0],label:"SC First Bank · Disney diary unboxing"},{...yt(["lR5rbtYNhJQ"])[0],label:"판교홍콩다방 · café ad"},{...yt(["R8cr5F52KzQ"])[0],label:"Eco cleaning · baking soda"},{...yt(["RKx77buW10k"])[0],label:"Eco cleaning · citric acid"},{...yt(["K1n7yy39wTo"])[0],label:"Eco cleaning · EM detergent"},{...yt(["78Mrd9xFVSg"])[0],label:"Eco cleaning · sodium percarbonate"},{...yt(["dhymzUso1B0"])[0],label:"Car leasing explained"},{...yt(["IUoc_GtuBzc"])[0],label:"Why a car dealer rents long-term"},{...yt(["ZOwia7ehShE"])[0],label:"Car leasing · zero upfront cost"},{...yt(["FYlx8k_4clw"])[0],label:"Insta concept trailer"}]},
+  {id:"scbank", cats:["corp"], client:"Korea · SC First Bank", title:"SC First Bank investment series", result:"4 episodes",
+   desc:"2020 investment-outlook series with the bank's strategists: dollar assets, asset strategy, portfolio investing and “Balancing Act”.",
+   roles:["Videographer"], orient:'h', link:"https://www.youtube.com/watch?v=izOqwXUcTXw&list=PLQ3qswgrqsSavbdS8eOq8Rpct7qCgJFie", items:[{...yt(["izOqwXUcTXw"])[0],label:"Why you need dollar assets"},{...yt(["z_3LSlrK8YI"])[0],label:"Strategy by asset class"},{...yt(["kxn5O98oRiY"])[0],label:"Why portfolio investing matters"},{...yt(["JW6UewMIt1o"])[0],label:"Balancing Act"}]},
+  {id:"gov", cats:["corp"], client:"Korea · Government ministries", title:"Government content", result:"Best 12 of 21",
+   desc:"Interviews, vlogs and campaign videos for the Ministry of Agriculture (MAFRA), Ministry of Economy & Finance and Ministry of Culture, Sports & Tourism.",
+   roles:["Editor", "Videographer"], orient:'h', items:[{...yt(["z-IgmgTLwG4"])[0],label:"Minister's visit to Miryang"},{...yt(["O2LD1hn0ZSo"])[0],label:"MAFRA · CEO interview ep2"},{...yt(["vH5MPz8yADs"])[0],label:"MAFRA · CEO interview ep1"},{...yt(["13ghcWjnUmo"])[0],label:"Idols cheer Korea's horse industry"},{...yt(["fQ0L0HeISYg"])[0],label:"Ministry of Economy & Finance · EP01"},{...yt(["CKku_T0KX6k"])[0],label:"Vice Minister · mask sales visit"},{...yt(["5VPl2917NL0"])[0],label:"Civil servants try farming"},{...yt(["lcz5Gmh__Es"])[0],label:"It's My Job #2"},{...yt(["_BR4fZMd9rY"])[0],label:"Smart farm start-up"},{...yt(["w9dedGdlpMw"])[0],label:"Green New Deal quiz-log"},{...yt(["ioVouxVnkJk"])[0],label:"Culture Ministry vlog"},{...yt(["mTuATYZl7R8"])[0],label:"Youth series · artist insurance"}]},
+  {id:"health", cats:["corp"], client:"Korea · Healthcare", title:"Hospital & health content", result:"Best 12",
+   desc:"Doctor talk shows for Seoul National University Hospital and a full content line for the 365mc hospital group: parodies, interviews and events.",
+   roles:["Editor", "Videographer"], orient:'h', items:[{...yt(["beQZVuD5aP8"])[0],label:"SNU Hospital · shoulder pain"},{...yt(["pabYqAooJJ4"])[0],label:"SNU Hospital · neck pain"},{...yt(["A4ZrUqv1XjU"])[0],label:"365mc · blind-date sketch"},{...yt(["-_8D-VbmiNA"])[0],label:"365mc · ad parody"},{...yt(["pH1KlHKjKbg"])[0],label:"365mc · surprise video letter"},{...yt(["vrD0vHVM3Yw"])[0],label:"365mc · 2019 year-end"},{...yt(["yAWkVjFwTCQ"])[0],label:"365mc Doctors · diet tips"},{...yt(["9Lla62wKilo"])[0],label:"365mc Doctors · stories"},{...yt(["8-wNxZVm62k"])[0],label:"365mc Doctors · design"},{...yt(["jJMVjhrgCOw"])[0],label:"365mc · global symposium"},{...yt(["-xCfvKjreDI"])[0],label:"365mc Doctors · book picks"},{...yt(["u_FeEaLoPXE"])[0],label:"Stem-cell therapy short"}]},
+  {id:"talk", cats:["corp", "drama"], client:"Korea · YouTube talk show", title:"Celebrity talk show episodes", result:"9 episodes",
+   desc:"Long-form talk episodes with comedians, a YouTuber and specialists, built on interviews and fast reaction cuts.",
+   roles:["Editor", "Videographer"], orient:'h', items:[{...yt(["fbqrGLFM3-M"])[0],label:"What comedians did after Gag Concert"},{...yt(["L8nx9oE8enk"])[0],label:"Comedian turned car dealer"},{...yt(["nfZew0J9Xi4"])[0],label:"Comedian Byun Gi-su"},{...yt(["Ik0V-YLsB4M"])[0],label:"How much YouTuber Gomong earns"},{...yt(["jG660Z5K01s"])[0],label:"Life of a host-bar worker"},{...yt(["RgH3pMGVGho"])[0],label:"Inside a cult"},{...yt(["L0mBvo3tD8k"])[0],label:"Waxing instructor stories"},{...yt(["4-TxgOsVAsE"])[0],label:"Urologist Q&A"},{...yt(["2NLAD_KvZ2s"])[0],label:"Comedian Oh Ji-heon special"}]},
+  {id:"interview", cats:["corp"], client:"Korea · Interview formats", title:"“If they called you” & street interviews", result:"11 episodes",
+   desc:"Video-call surprise interviews with musical actor Kai, footballer Jo Won-hee and artists, plus the “Your Thoughts” street-question series.",
+   roles:["Editor", "Videographer"], orient:'h', items:[{...yt(["81shU1oI4pE"])[0],label:"Musical actor Kai · video call"},{...yt(["x8V4zghy_Uk"])[0],label:"Musical actor Kai · surprise call"},{...yt(["Soc1RabgrqU"])[0],label:"Footballer Jo Won-hee"},{...yt(["J515mzReAz8"])[0],label:"Painter Kim Hyun-jung"},{...yt(["aCIm2W7Y_Lc"])[0],label:"Webtoon artist · how to start"},{...yt(["nk6dZBbrK3c"])[0],label:"Webtoon artist · surprise call"},{...yt(["PWZNDSXR03k"])[0],label:"Your life comic?"},{...yt(["Tbw_3uKz89I"])[0],label:"Sports star who moved you"},{...yt(["xIDqOYu2D2g"])[0],label:"Favourite Korean travel spot"},{...yt(["yTiQ0xkaBUA"])[0],label:"What workout do you do?"},{...yt(["KESd6omjOlE"])[0],label:"Hallyu stars and Korean products"}]},
+  {id:"films", cats:["drama", "corp"], client:"Taiwan & Korea · Personal work", title:"Short films & documentaries", result:"5 films",
+   desc:"Personal short films and documentaries made while studying in Taiwan and Korea, including the 27-minute documentary 我们的家.",
+   roles:["Editor", "Videographer"], orient:'h', items:[{...yt(["XOjE1UdE2ts"])[0],label:"我们的家 · documentary · 27 min"},{...yt(["jOAoc0sTOLY"])[0],label:"番花路75巷 · short film"},{...yt(["TAIdYZdCqoI"])[0],label:"나의 색깔 · short film"},{...yt(["za52h9TCBwo"])[0],label:"권대기 · short film"},{...yt(["OMf1C6_x3VA"])[0],label:"외달도 · travel vlog"}]},
 ];
 const byId = Object.fromEntries(P.map(p => [p.id, p]));
 
 const IND = [
   ['Music & Entertainment','Namewee 黃明志','music'],
-  ['Automotive','ServAuto','brand'],
-  ['Government','MAFRA Korea, Ministry of Environment','corp'],
-  ['Banking & Finance','SC First Bank','corp'],
-  ['F&B / Beverage','Kilang Minuman, Shoots Living Vibration','design'],
   ['Entertainment','谁是王者 YYDS, 96M, Winbox','drama'],
+  ['Automotive','ServAuto','brand'],
+  ['F&B / Beverage','Kilang Minuman, Shoots Living Vibration','design'],
+  ['Government','Korean ministries: MAFRA, Environment, Economy & Finance','corp'],
+  ['Banking & Finance','SC First Bank','corp'],
+  ['Healthcare','Seoul National University Hospital, 365mc','corp'],
+  ['Culture & Sports','2018 PyeongChang Legacy Foundation','corp'],
+  ['Talk shows & Web drama','Korean YouTube channels, Ministry of Environment','corp'],
 ];
 
 // selected: [projectId, itemIndex, custom result]
@@ -488,6 +533,7 @@ const SEL = [
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 function coverHTML(p, pickIdx){
   const it = p.items;
+  if (it[0].kind === 'img') return `<div class="cover quad">${it.slice(0,4).map(x=>`<img src="${x.thumb}" alt="" loading="lazy">`).join('')}`;
   if (p.orient === 'v' && pickIdx == null) {
     return `<div class="cover trio">${it.slice(0,3).map(x=>`<img src="${x.thumb}" alt="" loading="lazy">`).join('')}`;
   }
@@ -499,7 +545,7 @@ function cardHTML(p, opts={}){
   const n = p.items.length;
   const res = opts.result || p.result;
   return `<button class="card${opts.wide?' wide':''}" type="button" data-p="${p.id}" ${opts.pick!=null?`data-i="${opts.pick}"`:''}>
-    ${coverHTML(p, opts.pick)}<span class="count">${n} ${p.items[0].kind==='img'?'designs':(n===1?'video':'videos')}</span><span class="result">${esc(res)}</span><span class="play" aria-hidden="true"></span></div>
+    ${coverHTML(p, opts.pick)}<span class="count">${n} ${p.items[0].kind==='img'?'designs':(n===1?'video':'videos')}</span><span class="result">${esc(res)}</span>${p.items[0].kind==='img' ? '<span class="view" aria-hidden="true">▦ View gallery</span>' : '<span class="play" aria-hidden="true"></span>'}</div>
     <div class="body"><span class="client">${esc(p.client)}</span><h3>${esc(p.title)}</h3><p>${esc(p.desc)}</p>
     <div class="roles">${p.roles.map(r=>`<span>${esc(r)}</span>`).join('')}</div></div></button>`;
 }
@@ -552,22 +598,24 @@ function openProject(id, idx){
   document.getElementById('dlg-title').textContent = p.title;
   document.getElementById('dlg-desc').textContent = p.desc;
   document.getElementById('dlg-roles').innerHTML = p.roles.map(r=>`<span>${esc(r)}</span>`).join('');
-  itemsEl.className = 'items' + (p.orient==='v'?' v':p.orient==='sq'?' sq':'');
+  itemsEl.className = 'items' + (p.items[0].kind==='img' ? ' gal' : p.orient==='v'?' v':p.orient==='sq'?' sq':'');
   itemsEl.innerHTML = p.items.map((x,i) => `<a class="item" href="${x.url||x.src||x.full}" target="_blank" rel="noopener" data-i="${i}"><img src="${x.thumb}" alt="${esc(x.label||p.title+' '+(i+1))}" loading="lazy">${x.label?`<span class="lbl">${esc(x.label)}</span>`:''}</a>`).join('');
   const link = document.getElementById('dlg-link');
   if (p.link){ link.hidden=false; link.href=p.link; link.textContent = p.link.includes('tiktok')?'Open on TikTok ↗':p.link.includes('instagram')?'Open on Instagram ↗':p.link.includes('playlist')?'See full playlist ↗':'Open on YouTube ↗'; } else link.hidden = true;
   const anyExternal = p.items.some(x=>!inline(x));
-  document.getElementById('dlg-hint').textContent = anyExternal ? 'Tap a thumbnail to watch on ' + (p.items[0].kind==='tt'?'TikTok':'YouTube') : (p.items[0].kind==='img'?'Tap a design to view it large':'Tap a thumbnail to play');
+  document.getElementById('dlg-hint').textContent = anyExternal ? 'Tap a thumbnail to watch on ' + (p.items[0].kind==='tt'?'TikTok':'YouTube') : (p.items[0].kind==='img'?'Tap a design to view it full screen':'Tap a thumbnail to play');
   const more = {editing:L.editing.length, camera:L.camera.length, yyds:L.yyds.length}[p.id];
   if (more) document.getElementById('dlg-hint').textContent += ` · showing the best ${p.items.length} of ${more}`;
   stage.hidden = true; stage.innerHTML = '';
   dlg.showModal();
   itemsEl.scrollTop = 0;
-  if (idx != null && inline(p.items[idx])) play(p.items[idx], itemsEl.children[idx]);
+  if (idx != null && p.items[idx].kind === 'img') openLbx(idx);
+  else if (idx != null && inline(p.items[idx])) play(p.items[idx], itemsEl.children[idx]);
 }
 itemsEl.addEventListener('click', e => {
   const a = e.target.closest('.item'); if(!a) return;
   const x = openP.items[+a.dataset.i];
+  if (x.kind === 'img') { e.preventDefault(); openLbx(+a.dataset.i); return; }
   if (inline(x)) { e.preventDefault(); play(x, a); }
 });
 document.addEventListener('click', e => {
@@ -575,6 +623,23 @@ document.addEventListener('click', e => {
   hv.pause();
   openProject(c.dataset.p, c.dataset.i!=null ? +c.dataset.i : (byId[c.dataset.p].cats.includes('music') ? 0 : null));
 });
+// lightbox for designs
+const lbx = document.getElementById('lbx'), lbImg = document.getElementById('lbx-img'), lbCap = document.getElementById('lbx-cap');
+let lbI = 0;
+function showLbx(i){
+  const imgs = openP.items; lbI = (i + imgs.length) % imgs.length;
+  const x = imgs[lbI]; lbImg.src = x.full || x.thumb; lbImg.alt = x.label || '';
+  lbCap.innerHTML = `${esc(x.label||openP.title)}<span>${lbI+1} / ${imgs.length}</span>`;
+}
+function openLbx(i){ showLbx(i); if(!lbx.open) lbx.showModal(); }
+document.getElementById('lbx-prev').addEventListener('click', () => showLbx(lbI-1));
+document.getElementById('lbx-next').addEventListener('click', () => showLbx(lbI+1));
+document.getElementById('lbx-x').addEventListener('click', () => lbx.close());
+lbx.addEventListener('click', e => { if (e.target === lbx || e.target.classList.contains('lbx-in')) lbx.close(); });
+lbx.addEventListener('keydown', e => { if (e.key==='ArrowLeft') showLbx(lbI-1); if (e.key==='ArrowRight') showLbx(lbI+1); });
+let tx = null;
+lbx.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, {passive:true});
+lbx.addEventListener('touchend', e => { if (tx==null) return; const d = e.changedTouches[0].clientX - tx; if (Math.abs(d) > 50) showLbx(lbI + (d < 0 ? 1 : -1)); tx = null; });
 function closeDlg(){ stage.innerHTML=''; dlg.close(); }
 document.getElementById('dlg-x').addEventListener('click', closeDlg);
 dlg.addEventListener('click', e => { if (e.target === dlg) closeDlg(); });
