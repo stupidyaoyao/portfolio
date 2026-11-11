@@ -306,6 +306,7 @@ dialog::backdrop{background:var(--scrim)}
   .subbar button{flex:none}
   .grid{grid-template-columns:1fr 1fr;gap:12px}
   .grid .card.wide{grid-column:1/-1}
+  .grid .card.solo{grid-column:1/-1}
   .grid .card.wide .cover{aspect-ratio:16/9;height:auto;min-height:0}
   .grid .card:not(.wide) .body{padding:10px 11px 12px;gap:4px}
   .grid .card:not(.wide) .body h3{font-size:14px}
@@ -634,6 +635,7 @@ function renderGrid(){
   const grid = document.getElementById('grid');
   grid.hidden = cur === 'design';
   grid.innerHTML = cur==='design' ? '' : vids.map(p => cardHTML(p, {wide: (p.wideIn||[]).includes(cur)})).join('');
+  const small=[...grid.querySelectorAll('.card:not(.wide)')]; if (small.length % 2) small[small.length-1].classList.add('solo');
   document.getElementById('dwall').hidden = !(cur==='all' || cur==='design');
   const sb = document.getElementById('subbar');
   if (cur==='all' || cur==='design') { sb.hidden = true; sb.innerHTML=''; }
